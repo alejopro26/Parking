@@ -1,0 +1,35 @@
+CREATE DATABASE usuarios;
+
+USE usuarios;
+
+CREATE TABLE usuarios (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    password VARCHAR(255),
+    username VARCHAR(255)
+) ENGINE=InnoDB;
+
+INSERT INTO usuarios (id_usuario, password, username) VALUES
+(1, 'admin1234', 'Administrador'),
+(2, 'user1234', 'Usuario');
+
+CREATE TABLE todo (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_name VARCHAR(255),
+	plate VARCHAR(255),
+    entry_hour INT,
+    exit_hour INT,
+    location INT,
+    vehicle_type VARCHAR(255)
+) ENGINE=InnoDB;
+
+CREATE TABLE rol (
+    id_rol INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255),
+    id_usuario INT,
+    CONSTRAINT id_rol_usuario FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+INSERT INTO rol (id_rol, nombre, id_usuario) VALUES
+(1, 'ROLE_ADMIN', 1),
+(2, 'ROLE_USER', 2),
+(3, 'ROLE_USER', 1);
